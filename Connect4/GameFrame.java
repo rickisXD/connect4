@@ -1,4 +1,5 @@
 import processing.core.PImage;
+import processing.core.PApplet;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -7,6 +8,7 @@ import java.util.List;
 
 public class GameFrame {
 
+    private PApplet screen;
     private PImage gameBoard;
     private int windowX;
     private int windowY;

@@ -1,9 +1,12 @@
+import processing.core.PApplet;
 import java.awt.*;
 
 public abstract class Player {
-    public Color markerColor;
-    public int turnNumber;
-    public boolean myTurn;
-    public abstract void takeTurn();
-    public abstract boolean checkWin();
+    protected PApplet screen;
+    protected Color markerColor;
+    protected int turnNumber;
+    protected boolean myTurn;
+    protected abstract void takeTurn(int col, GameFrame board);
+    protected abstract void toggleTurn();
+    protected abstract boolean checkWin();
 }
