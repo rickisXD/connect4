@@ -12,7 +12,7 @@ public class Connect4 extends PApplet {
 	private boolean mouseClicked = false;
 	private String screen = "start";
 	private Player player;
-	private HumanPlayer me = new HumanPlayer(0, Color.WHITE, this);
+	private HumanPlayer me = new HumanPlayer(0, Color.WHITE, this, true);
 	private Player currentPlayer = me;
 	private GameFrame board;
 	private String playerType;
@@ -33,7 +33,7 @@ public class Connect4 extends PApplet {
 				break;
 
 			case "selection":
-				background(0);//reset background to gray
+				background(0); //reset background to gray
 				textSize(18);
 				fill(0, 102, 153, 255);
 				text("Choose your Opponent:", 10, 30);
@@ -73,16 +73,23 @@ public class Connect4 extends PApplet {
 					}
 				}
 
-//				if(me.myTurn) {
-//					textSize(25);
-//					fill(0, 102, 153, 255);
-//					text("Your turn!", 220, 100);
-//				}
-//				else if(player.myTurn) {
-//					textSize(25);
-//					fill(0, 102, 153, 255);
-//					text("Their turn!", 220, 100);
-//				}
+				if(me.myTurn) {
+					textSize(25);
+					fill(0, 102, 153, 255);
+					text("Your turn!", 220, 100);
+					currentPlayer = me;
+				}
+				else if(player.myTurn) {
+					textSize(25);
+					fill(0, 102, 153, 255);
+					text("Their turn!", 220, 100);
+					if (player instanceof SmartPlayer) {
+						player.takeTurn(0, board);
+						me.toggleTurn();
+						player.toggleTurn();
+					}
+					currentPlayer = player;
+				}
 
 			// INDICATOR TO SHOW WHERE MARKER WILL BE PLACED
 
@@ -119,7 +126,7 @@ public class Connect4 extends PApplet {
 						playerType = "Smart Player";
 					}
 					else if (mouseY > 89 && mouseY < 110) {
-						player = new HumanPlayer(0, Color.RED, this);
+						player = new HumanPlayer(0, Color.RED, this, false);
 						screen = "gameOn";
 						playerType = "Human Player";
 					}
@@ -130,7 +137,16 @@ public class Connect4 extends PApplet {
 				if (mouseX >= board.centeredX() && mouseX < board.centeredX() + 491) {
 					int col = ((mouseX - board.centeredX()) / 70) + 1;
 					if (board.lowestRow(col) != -1) {
-						currentPlayer.takeTurn(col, board);
+						if (me.myTurn) {
+							me.takeTurn(col, board);
+							me.toggleTurn();
+							player.toggleTurn();
+						}
+						else if (player.myTurn && player instanceof HumanPlayer){
+							player.takeTurn(col, board);
+							me.toggleTurn();
+							player.toggleTurn();
+						}
 					}
 				}
 				break;
