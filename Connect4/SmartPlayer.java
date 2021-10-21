@@ -1,14 +1,10 @@
 import processing.core.PApplet;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 public class SmartPlayer extends Player {
-
-    private Map<Integer, Integer> markerColumns = new HashMap<>();
 
     public SmartPlayer(int turnNumber, Color color, PApplet screen) {
         this.turnNumber = turnNumber;
@@ -17,8 +13,8 @@ public class SmartPlayer extends Player {
         this.myTurn = false;
     }
 
-    public void takeTurn(int col, GameFrame board) {
-        col = (int)Math.floor(Math.random() * 7) + 1;
+    public void takeTurn(List<ArrayList<Integer>> opponentMarkers, GameFrame board) {
+        int col = (int)Math.floor(Math.random() * 7) + 1;
         while (board.lowestRow(col) == -1) {
             col = (int)Math.floor(Math.random() * 7) + 1;
         }
@@ -28,10 +24,7 @@ public class SmartPlayer extends Player {
                 238 + (board.lowestRow(col) - 1) * 70, 56);
         Marker marker = new Marker(this.markerColor, row, col);
         board.addMarker(marker);
-        this.markerColumns.put(col, row);
+        this.markerColumns.get(col - 1).add(row);
     }
 
-    public boolean checkWin() {return true;}
-
-    public void toggleTurn() {this.myTurn = !this.myTurn;}
 }

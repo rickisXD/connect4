@@ -31,10 +31,6 @@ public class GameFrame {
         return (windowX / 2) - (gameBoard.width / 2);
     }
 
-    public boolean isRendered() {return this.rendered;}
-
-    public void setRendered() {this.rendered = true;}
-
     public int lowestRow(int col) {
         if (markers.size() == 0) {
             return 6;
