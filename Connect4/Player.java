@@ -11,7 +11,6 @@ public abstract class Player {
             new ArrayList<Integer>(), new ArrayList<Integer>(), new ArrayList<Integer>());
     protected PApplet screen;
     protected Color markerColor;
-    protected int turnNumber;
     protected boolean myTurn;
     public void toggleTurn() { this.myTurn = !this.myTurn; }
 
@@ -27,9 +26,9 @@ public abstract class Player {
         }
 
         //check for horiz win '-'
-        for (int col = 0; col < 3; col++) {
+        for (int col = 0; col < 4; col++) {
             for (int row = 1; row < 7; row++) {
-                if (markerColumns.get(col).contains(row) & markerColumns.get(col + 1).contains(row) &&
+                if (markerColumns.get(col).contains(row) && markerColumns.get(col + 1).contains(row) &&
                         markerColumns.get(col + 2).contains(row) && markerColumns.get(col + 3).contains(row)) {
                     return true;
                 }
@@ -39,7 +38,7 @@ public abstract class Player {
         //check diagonal '/'
         for (int col = 0; col < 4; col++) {
             for (int row = 6; row > 2; row--) {
-                if (markerColumns.get(col).contains(row) & markerColumns.get(col + 1).contains(row - 1) &&
+                if (markerColumns.get(col).contains(row) && markerColumns.get(col + 1).contains(row - 1) &&
                         markerColumns.get(col + 2).contains(row - 2) && markerColumns.get(col + 3).contains(row - 3)) {
                     return true;
                 }
@@ -49,7 +48,7 @@ public abstract class Player {
         //check diagonal '\'
         for (int col = 6; col > 2; col--) {
             for (int row = 6; row > 2; row--) {
-                if (markerColumns.get(col).contains(row) & markerColumns.get(col - 1).contains(row - 1) &&
+                if (markerColumns.get(col).contains(row) && markerColumns.get(col - 1).contains(row - 1) &&
                         markerColumns.get(col - 2).contains(row - 2) && markerColumns.get(col - 3).contains(row - 3)) {
                     return true;
                 }

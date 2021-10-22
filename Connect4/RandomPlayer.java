@@ -6,8 +6,7 @@ import java.util.List;
 
 public class RandomPlayer extends Player{
 
-    public RandomPlayer(int turnNumber, Color color, PApplet screen) {
-        this.turnNumber = turnNumber;
+    public RandomPlayer(Color color, PApplet screen) {
         this.markerColor = color;
         this.screen = screen;
         this.myTurn = false;
@@ -15,7 +14,7 @@ public class RandomPlayer extends Player{
 
     public void takeTurn(GameFrame board) {
         int col = (int)Math.floor(Math.random() * 7) + 1;
-        while (board.lowestRow(col) == -1) {
+        while (board.lowestRow(col) == -1 && board.getMarkers().size() != 42) {
             col = (int)Math.floor(Math.random() * 7) + 1;
         }
         int row = board.lowestRow(col);

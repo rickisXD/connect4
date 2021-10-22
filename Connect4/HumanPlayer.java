@@ -6,8 +6,7 @@ import java.util.List;
 
 public class HumanPlayer extends Player{
 
-    public HumanPlayer(int turnNumber, Color color, PApplet screen, boolean myTurn) {
-        this.turnNumber = turnNumber;
+    public HumanPlayer(Color color, PApplet screen, boolean myTurn) {
         this.markerColor = color;
         this.screen = screen;
         this.myTurn = myTurn;

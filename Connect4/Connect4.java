@@ -1,6 +1,16 @@
 import processing.core.PApplet;
 import processing.core.PImage;
 
+// THINGS TO DO:
+// MAKE SMART PLAYER ALGORITHM
+// MIN 100% IS THAT IT WORKS
+// PUT ISSUES INTO README
+// PLAYABLE GAME WITH NICE STRCUTRE = 100
+// SMART PLAYER NEEDS TO AT LEAST PREVENT YOU FROM WINNING
+// IF YOU PLAY FIRST, GO ODD
+// IF YOU PLAY SECOND, GO EVEN
+// PREVENT WIN IS MIN
+
 import java.awt.*;
 
 public class Connect4 extends PApplet {
@@ -11,7 +21,7 @@ public class Connect4 extends PApplet {
 
 	private String screen = "start";
 	private Player player;
-	private HumanPlayer me = new HumanPlayer(0, Color.WHITE, this, true);
+	private HumanPlayer me = new HumanPlayer(Color.WHITE, this, true);
 	private Player currentPlayer = me;
 	private GameFrame board;
 	private String playerType;
@@ -88,7 +98,13 @@ public class Connect4 extends PApplet {
 						}
 					}
 				}
-				if(currentPlayer.checkWin()) {
+
+				if (currentPlayer.checkWin()) {
+					screen = "endGame";
+					break;
+				}
+
+				if (board.getMarkers().size() == 42) {
 					screen = "endGame";
 					break;
 				}
@@ -157,6 +173,11 @@ public class Connect4 extends PApplet {
 					fill(255, 0, 0);
 					text("You Lose!", 245, 100);
 				}
+
+				if (board.getMarkers().size() == 42) {
+					fill(255, 255, 255);
+					text("It's a Tie!", 245, 100);
+				}
 				break;
 		}
 	}
@@ -170,17 +191,17 @@ public class Connect4 extends PApplet {
 			case "selection":
 				if (mouseX > 20 && mouseX < 150) {
 					if (mouseY > 49 && mouseY < 70) {
-						player = new SmartPlayer(0, Color.RED, this);
+						player = new SmartPlayer(Color.RED, this);
 						screen = "selectFirst";
 						playerType = "Random Player";
 					}
 					else if (mouseY > 69 && mouseY < 90) {
 						screen = "selectFirst";
-						player = new SmartPlayer(0, Color.RED, this);
+						player = new SmartPlayer( Color.RED, this);
 						playerType = "Smart Player";
 					}
 					else if (mouseY > 89 && mouseY < 110) {
-						player = new HumanPlayer(0, Color.RED, this, false);
+						player = new HumanPlayer(Color.RED, this, false);
 						screen = "selectFirst";
 						playerType = "Human Player";
 					}
