@@ -1,16 +1,6 @@
 import processing.core.PApplet;
 import processing.core.PImage;
 
-// THINGS TO DO:
-// MAKE SMART PLAYER ALGORITHM
-// MIN 100% IS THAT IT WORKS
-// PUT ISSUES INTO README
-// PLAYABLE GAME WITH NICE STRCUTRE = 100
-// SMART PLAYER NEEDS TO AT LEAST PREVENT YOU FROM WINNING
-// IF YOU PLAY FIRST, GO ODD
-// IF YOU PLAY SECOND, GO EVEN
-// PREVENT WIN IS MIN
-
 import java.awt.*;
 
 public class Connect4 extends PApplet {
